@@ -23,7 +23,7 @@ Shazam Blog will have the following features:
 - [ ] SEO
 - [ ] Sitemap
 - [ ] RSS Feed
-- [ ] Social Media Sharing
+- [ ] Social Media Sharing and Auto open graph image
 - [ ] Analytics
 - [ ] Email Notifications
 - [ ] Email Verification

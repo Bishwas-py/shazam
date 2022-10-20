@@ -13,3 +13,7 @@ class SiteInfo(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "Site Information"
+        verbose_name_plural = "Site Information"

@@ -6,5 +6,6 @@ from general.models import SiteInfo
 
 class Site(APIView):
     def get(self, request):
-        site = SiteInfoSerializer(SiteInfo.objects.get(pk=1))
+        site_info, _ = SiteInfo.objects.get_or_create(pk=1)
+        site = SiteInfoSerializer(site_info)
         return Response(site.data)

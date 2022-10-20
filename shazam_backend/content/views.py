@@ -1,5 +1,7 @@
 # views for the content app, with the serializers imported
+from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from content.serializers import PostSerializer, CategorySerializer, TagSerializer
@@ -20,7 +22,7 @@ class Posts(APIView):
         return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        post = Post.objects.get(pk=request.data['id'])
+        post = get_object_or_404(Post, pk=request.data['id'])
         post = PostSerializer(post, data=request.data, partial=True)
         if post.is_valid():
             post.save()
@@ -28,13 +30,13 @@ class Posts(APIView):
         return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request):
-        post = Post.objects.get(pk=request.data['id'])
+        post = get_object_or_404(Post, pk=request.data['id'])
         post.delete()
         return Response("Post deleted", status=status.HTTP_204_NO_CONTENT)
 
 
 class Categories(APIView):
-    def get(self, request):
+    def get(self, request, **kwargs):
         categories = Category.objects.all()
         categories = CategorySerializer(categories, many=True)
         return Response(categories.data, status=status.HTTP_200_OK)
@@ -47,7 +49,7 @@ class Categories(APIView):
         return Response(category.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        category = Category.objects.get(pk=request.data['id'])
+        category = get_object_or_404(Category, pk=request.data['id'])
         category = CategorySerializer(category, data=request.data, partial=True)
         if category.is_valid():
             category.save()
@@ -55,7 +57,7 @@ class Categories(APIView):
         return Response(category.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request):
-        category = Category.objects.get(pk=request.data['id'])
+        category = get_object_or_404(Category, pk=request.data['id'])
         category.delete()
         return Response("Category deleted", status=status.HTTP_204_NO_CONTENT)
 
@@ -74,7 +76,7 @@ class Tags(APIView):
         return Response(tag.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        tag = Tag.objects.get(pk=request.data['id'])
+        tag = get_object_or_404(Tag, pk=request.data['id'])
         tag = TagSerializer(tag, data=request.data, partial=True)
         if tag.is_valid():
             tag.save()
@@ -82,6 +84,27 @@ class Tags(APIView):
         return Response(tag.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request):
-        tag = Tag.objects.get(pk=request.data['id'])
+        tag = get_object_or_404(Tag, pk=request.data['id'])
         tag.delete()
         return Response("Tag deleted", status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def get_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category = CategorySerializer(category)
+    return Response(category.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post = PostSerializer(post)
+    return Response(post.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_tag(request, pk):
+    tag = get_object_or_404(Tag, pk=pk)
+    tag = TagSerializer(tag)
+    return Response(tag.data, status=status.HTTP_200_OK)

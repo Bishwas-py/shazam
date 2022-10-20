@@ -10,7 +10,7 @@ from content.models import Post, Category, Tag
 class PostTests(APITestCase):
     def test_create_post(self):
         """
-        Ensure we can create a new post object.
+        Ensure we can create a new post object; use all required field to create post
         """
         url = reverse('posts')
         tag = Tag.objects.create(name='#test')
@@ -27,7 +27,8 @@ class PostTests(APITestCase):
 
     def test_update_post(self):
         """
-        Ensure we can update a post object.
+        Ensure we can update a post object;
+        use id, title [or any] field to check post update
         """
         tag = Tag.objects.create(name='#test')
         category = Category.objects.create(name='test')
@@ -36,17 +37,20 @@ class PostTests(APITestCase):
         )
         post.tags.add(tag)
         url = reverse('posts')
+        new_title = 'Test Post Updated'
+
         data = {
-            'id': post.id, 'title': 'Test Post Updated',
+            'id': post.id, 'title': new_title,
         }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
         self.assertEqual(Post.objects.count(), 1)
-        self.assertEqual(Post.objects.get().title, 'Test Post Updated')
+        self.assertEqual(Post.objects.get().title, new_title)
 
     def test_delete_post(self):
         """
-        Ensure we can delete a post object.
+        Ensure we can delete a post object;
+        use `id` to check delete post
         """
         tag = Tag.objects.create(name="#test")
         category = Category.objects.create(name='test')
@@ -65,15 +69,32 @@ class PostTests(APITestCase):
 class CategoryTests(APITestCase):
     def test_create_category(self):
         """
-        Ensure we can create a new category
+        Ensure we can create a new category;
+        use `name` [or with `slug`] to create category
         """
         url = reverse('categories')
         data = {
             'name': 'Test Category'
         }
-        response = self.client.post(url, data, follow='json')
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Category.objects.count(), 1)
         self.assertEqual(Category.objects.get().name, 'Test Category')
 
-    def test_update_post
+    def test_update_post(self):
+        """
+        Ensure we can update the category;
+        use `slug` [or `name`] to check updates
+        """
+        url = reverse('categories')
+        category = Category.objects.create(
+            name='Test Category'
+        )
+        new_slug = 'test-category-updated'
+        data = {
+            'id': category.id,
+            'slug': new_slug
+        }
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+        self.assertEqual(Category.objects.get().slug, new_slug)

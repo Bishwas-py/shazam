@@ -48,7 +48,7 @@ class Categories(APIView):
 
     def put(self, request):
         category = Category.objects.get(pk=request.data['id'])
-        category = CategorySerializer(category, data=request.data)
+        category = CategorySerializer(category, data=request.data, partial=True)
         if category.is_valid():
             category.save()
             return Response(category.data, status=status.HTTP_202_ACCEPTED)

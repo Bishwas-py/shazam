@@ -81,7 +81,7 @@ class CategoryTests(APITestCase):
         self.assertEqual(Category.objects.count(), 1)
         self.assertEqual(Category.objects.get().name, 'Test Category')
 
-    def test_update_post(self):
+    def test_update_category(self):
         """
         Ensure we can update the category;
         use `slug` [or `name`] to check updates
@@ -98,3 +98,61 @@ class CategoryTests(APITestCase):
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
         self.assertEqual(Category.objects.get().slug, new_slug)
+
+    def test_delete_category(self):
+        category = Category.objects.create(
+            name='Test Category'
+        )
+        url = reverse('categories')
+        data = {
+            'id': category.id
+        }
+        response = self.client.delete(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Category.objects.count(), 0)
+
+
+class TagTests(APITestCase):
+    def test_create_tag(self):
+        """
+        Ensure we can create a new tag;
+        use `name` to create tag
+        """
+        url = reverse('tags')
+        data = {
+            'name': '#test'
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Tag.objects.count(), 1)
+        self.assertEqual(Tag.objects.get().name, '#test')
+
+    def test_update_tag_(self):
+        """
+        Ensure we can update the tag;
+        use id and `slug` [or name] to check updates
+        """
+        url = reverse('tags')
+        tag = Tag.objects.create(
+            name='#test'
+        )
+        new_slug = 'test-updated'
+        data = {
+            'id': tag.id,
+            'slug': new_slug
+        }
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+        self.assertEqual(Tag.objects.get().slug, new_slug)
+
+    def test_delete_tag(self):
+        tag = Tag.objects.create(
+            name='#test'
+        )
+        url = reverse('tags')
+        data = {
+            'id': tag.id
+        }
+        response = self.client.delete(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Tag.objects.count(), 0)

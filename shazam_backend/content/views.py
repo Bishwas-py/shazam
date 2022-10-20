@@ -75,7 +75,7 @@ class Tags(APIView):
 
     def put(self, request):
         tag = Tag.objects.get(pk=request.data['id'])
-        tag = TagSerializer(tag, data=request.data)
+        tag = TagSerializer(tag, data=request.data, partial=True)
         if tag.is_valid():
             tag.save()
             return Response(tag.data, status=status.HTTP_202_ACCEPTED)

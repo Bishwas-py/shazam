@@ -1,7 +1,8 @@
 # views for the content app, with the serializers imported
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from content.serializers import PostSerializer, CategorySerializer, TagSerializer
@@ -14,6 +15,7 @@ class Posts(APIView):
         posts = PostSerializer(posts, many=True)
         return Response(posts.data, status=status.HTTP_200_OK)
 
+    @permission_classes([IsAuthenticated])
     def post(self, request):
         post = PostSerializer(data=request.data)
         if post.is_valid():
@@ -21,6 +23,7 @@ class Posts(APIView):
             return Response(post.data, status=status.HTTP_201_CREATED)
         return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @permission_classes([IsAuthenticated])
     def put(self, request):
         post = get_object_or_404(Post, pk=request.data['id'])
         post = PostSerializer(post, data=request.data, partial=True)
@@ -29,6 +32,7 @@ class Posts(APIView):
             return Response(post.data, status=status.HTTP_202_ACCEPTED)
         return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @permission_classes([IsAuthenticated])
     def delete(self, request):
         post = get_object_or_404(Post, pk=request.data['id'])
         post.delete()
@@ -41,6 +45,7 @@ class Categories(APIView):
         categories = CategorySerializer(categories, many=True)
         return Response(categories.data, status=status.HTTP_200_OK)
 
+    @permission_classes([IsAuthenticated])
     def post(self, request):
         category = CategorySerializer(data=request.data)
         if category.is_valid():
@@ -48,6 +53,7 @@ class Categories(APIView):
             return Response(category.data, status=status.HTTP_201_CREATED)
         return Response(category.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @permission_classes([IsAuthenticated])
     def put(self, request):
         category = get_object_or_404(Category, pk=request.data['id'])
         category = CategorySerializer(category, data=request.data, partial=True)
@@ -56,6 +62,7 @@ class Categories(APIView):
             return Response(category.data, status=status.HTTP_202_ACCEPTED)
         return Response(category.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @permission_classes([IsAuthenticated])
     def delete(self, request):
         category = get_object_or_404(Category, pk=request.data['id'])
         category.delete()
@@ -68,6 +75,7 @@ class Tags(APIView):
         tags = TagSerializer(tags, many=True)
         return Response(tags.data, status=status.HTTP_200_OK)
 
+    @permission_classes([IsAuthenticated])
     def post(self, request):
         tag = TagSerializer(data=request.data)
         if tag.is_valid():
@@ -75,6 +83,7 @@ class Tags(APIView):
             return Response(tag.data, status=status.HTTP_201_CREATED)
         return Response(tag.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @permission_classes([IsAuthenticated])
     def put(self, request):
         tag = get_object_or_404(Tag, pk=request.data['id'])
         tag = TagSerializer(tag, data=request.data, partial=True)
@@ -83,6 +92,7 @@ class Tags(APIView):
             return Response(tag.data, status=status.HTTP_202_ACCEPTED)
         return Response(tag.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @permission_classes([IsAuthenticated])
     def delete(self, request):
         tag = get_object_or_404(Tag, pk=request.data['id'])
         tag.delete()
@@ -90,7 +100,9 @@ class Tags(APIView):
 
 
 @api_view(['GET'])
+# set permission to authenticated only
 def get_category(request, pk):
+    print(request.headers['Authorization'])
     category = get_object_or_404(Category, pk=pk)
     category = CategorySerializer(category)
     return Response(category.data, status=status.HTTP_200_OK)

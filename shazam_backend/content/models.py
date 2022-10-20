@@ -33,12 +33,13 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def create_slug(self):
-        slug = slugify(self.name)
-        return slug
+        if not self.slug:
+            self.slug = slugify(self.name)
+        else:
+            self.slug = slugify(self.slug)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self.create_slug()
+        self.create_slug()
         super(Category, self).save(*args, **kwargs)
 
 
@@ -56,10 +57,11 @@ class Tag(models.Model):
         verbose_name_plural = "Tags"
 
     def create_slug(self):
-        slug = slugify(self.name)
-        return slug
+        if not self.slug:
+            self.slug = slugify(self.name)
+        else:
+            self.slug = slugify(self.slug)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self.create_slug()
+        self.create_slug()
         super(Tag, self).save(*args, **kwargs)

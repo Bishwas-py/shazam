@@ -1,18 +1,33 @@
+from typing import Optional
 from django.db import models
 from django.utils.text import slugify
+from helpers.sanitizer import sanitize_content
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
-    body = models.TextField()
+    title = models.CharField(max_length=100, null=False, blank=False)
+    body = models.TextField(null=False, blank=False)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag')
     keywords = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.create_slug()
+        self.sanitize()
+        super(Post, self).save(*args, **kwargs)
+
+    def create_slug(self):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+    def sanitize(self):
+        self.body = sanitize_content(self.body)
 
     class Meta:
         verbose_name = "Post"
@@ -35,8 +50,6 @@ class Category(models.Model):
     def create_slug(self):
         if not self.slug:
             self.slug = slugify(self.name)
-        else:
-            self.slug = slugify(self.slug)
 
     def save(self, *args, **kwargs):
         self.create_slug()
@@ -59,8 +72,6 @@ class Tag(models.Model):
     def create_slug(self):
         if not self.slug:
             self.slug = slugify(self.name)
-        else:
-            self.slug = slugify(self.slug)
 
     def save(self, *args, **kwargs):
         self.create_slug()

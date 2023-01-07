@@ -1,0 +1,8 @@
+/* Regular */
+@font-face {
+    font-family: 'combo';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''), url('../assets/combo/Combo-Regular.ttf') format('truetype');
+    font-display: swap;
+}

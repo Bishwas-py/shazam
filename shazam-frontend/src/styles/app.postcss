@@ -1,0 +1,191 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    sup.new {
+        @apply text-xs text-white bg-red-500 rounded-full px-1;
+    }
+    body {
+        @apply text-gray-700 dark:text-gray-50;
+        @apply font-lato;
+        @apply min-h-screen w-full;
+        @apply bg-slate-50 dark:bg-gray-900;
+    }
+
+    .is-link {
+        @apply cursor-pointer;
+        @apply text-indigo-700 dark:text-indigo-300;
+        @apply hover:text-indigo-700 hover:dark:text-indigo-600;
+    }
+
+    code {
+        @apply bg-indigo-100 dark:bg-gray-500;
+        @apply text-gray-700 dark:text-gray-50;
+        @apply px-1 py-0.5;
+        @apply rounded;
+    }
+
+
+    pre {
+        @apply bg-gray-100 p-4 rounded;
+        @apply text-sm text-gray-800;
+        @apply overflow-auto;
+        /*    white space */
+        @apply whitespace-pre-line;
+    }
+
+    ul {
+        @apply list-disc;
+        @apply list-inside;
+        @apply ml-4;
+    }
+
+    li {
+        @apply my-1;
+        @apply text-gray-700 dark:text-gray-50;
+    }
+}
+
+
+@layer components {
+    .search-section {
+        @apply flex flex-col gap-7 px-7 justify-center min-h-[24rem] py-7;
+        @apply bg-sky-50 dark:bg-stone-700/5 dark:border-b-8 dark:border-b-stone-700/5;
+    }
+
+    .form-box {
+        @apply flex-col max-w-lg w-full;
+        @apply flex gap-3;
+    }
+
+    .input-group {
+        @apply flex flex-col gap-1;
+    }
+
+    .input-group label {
+        @apply text-lg font-ssp;
+    }
+
+
+    .menu-items-container {
+        @apply shadow rounded;
+        @apply z-50 absolute;
+        @apply bg-white dark:bg-gray-800;
+    }
+
+    .square-item-divider {
+        @apply grid grid-cols-4;
+
+        @apply border-t border-gray-200 dark:border-gray-700;
+        @apply divide-x divide-slate-200 dark:divide-slate-800;
+    }
+
+    .btn {
+        @apply text-white px-5 sm:px-4 md:px-7;
+        @apply rounded-xl;
+        @apply shadow drop-shadow;
+        @apply active:scale-90;
+        @apply focus:ring-2 focus:ring-opacity-50 duration-200;
+        @apply focus:outline-none focus:ring-offset-0;
+        @apply grid place-items-center;
+
+    }
+
+    .explain {
+        @apply my-12 first:mt-7;
+    }
+
+    .explain h2, .explain h3, .common-h2, .common-h3 {
+        @apply font-ssp;
+    }
+
+    .explain h2, .common-h2 {
+        @apply text-3xl font-extrabold;
+        @apply text-gray-800 dark:text-gray-100;
+    }
+
+    .explain h3, .common-h3 {
+        @apply text-2xl font-semibold mt-4;
+        @apply text-gray-700 dark:text-gray-300;
+    }
+
+    .explain p {
+        @apply text-lg font-inter my-5;
+        @apply text-gray-800 dark:text-gray-100;
+    }
+
+    .result {
+        @apply mx-auto px-8 lg:px-32 duration-500;
+    }
+
+    .input-primary {
+        @apply rounded-xl px-4 w-full h-full;
+        @apply bg-white dark:bg-gray-800;
+        @apply shadow;
+        @apply focus:ring focus:outline-none;
+    }
+
+    .button-primary {
+        @apply bg-white dark:bg-gray-800;
+        @apply shadow;
+        @apply focus:ring focus:outline-none;
+        @apply rounded-xl h-full;
+    }
+
+    .button-icony {
+        @apply button-primary;
+        @apply flex flex-row h-12 w-fit px-3 gap-3 justify-center items-center;
+    }
+
+    .input-h1 {
+        @apply text-3xl md:text-4xl lg:text-5xl font-extrabold;
+        @apply font-play-fair mx-auto text-center;
+        @apply text-gray-800 dark:text-gray-100;
+    }
+
+    .input-h2 {
+        @apply text-xl font-medium;
+        @apply mx-auto text-center;
+        @apply font-ssp;
+        @apply text-gray-600 dark:text-gray-300;
+    }
+
+    .input-box {
+        @apply flex-row max-w-xl w-full;
+        @apply h-12 flex gap-3;
+    }
+
+    .select-primary {
+        @apply input-primary;
+        @apply h-12 w-full;
+        @apply text-black focus:text-white focus:bg-gray-900;
+        @apply dark:text-white dark:focus:text-blue-50 dark:focus:bg-slate-900;
+    }
+
+
+    .infos {
+        @apply flex flex-col gap-2;
+    }
+
+    .info-card {
+        @apply border-t relative mt-7;
+        @apply sm:px-3 md:px-5 lg:px-7 pt-7 sm:pt-11 pb-4;
+        @apply dark:border-gray-700;
+    }
+
+    .info-card.main h2 {
+        @apply bg-sky-100 dark:bg-sky-900;
+        @apply text-sky-900 dark:text-sky-100;
+    }
+
+    .info-card h2 {
+        @apply ml-2 sm:mx-0 text-xs sm:text-lg md:text-xl lg:text-2xl common-h3 absolute -top-6 sm:-top-8 px-4;
+        @apply bg-violet-50 dark:bg-violet-900 rounded;
+    }
+}
+
+@layer utilities {
+
+}

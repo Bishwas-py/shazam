@@ -1,0 +1,108 @@
+/* Regular */
+@font-face {
+    font-family: 'play-fair';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Black */
+@font-face {
+    font-family: 'play-fair';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-Black.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Black Italic */
+@font-face {
+    font-family: 'play-fair';
+    font-style: italic;
+    font-weight: 900;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-BlackItalic.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Bold */
+@font-face {
+    font-family: 'play-fair';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-Bold.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Bold Italic */
+@font-face {
+    font-family: 'play-fair';
+    font-style: italic;
+    font-weight: 700;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* ExtraBold */
+@font-face {
+    font-family: 'play-fair';
+    font-style: normal;
+    font-weight: 800;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-ExtraBold.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* ExtraBold Italic */
+@font-face {
+    font-family: 'play-fair';
+    font-style: italic;
+    font-weight: 800;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-ExtraBoldItalic.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Italic */
+@font-face {
+    font-family: 'play-fair';
+    font-style: italic;
+    font-weight: 400;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-Italic.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Medium */
+@font-face {
+    font-family: 'play-fair';
+    font-style: normal;
+    font-weight: 500;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-Medium.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Medium Italic */
+@font-face {
+    font-family: 'play-fair';
+    font-style: italic;
+    font-weight: 500;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-MediumItalic.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* SemiBold */
+@font-face {
+    font-family: 'play-fair';
+    font-style: normal;
+    font-weight: 600;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-SemiBold.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* SemiBold Italic */
+@font-face {
+    font-family: 'play-fair';
+    font-style: italic;
+    font-weight: 600;
+    src: local(''), url('../assets/play-fair/PlayfairDisplay-SemiBoldItalic.ttf') format('truetype');
+    font-display: swap;
+}
+

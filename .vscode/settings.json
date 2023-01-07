@@ -2,4 +2,13 @@
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"
       },
+  "material-icon-theme.folders.theme": "specific",
+  "material-icon-theme.folders.associations": {
+      "shazam_backend": "json",
+      "virtualenv": "container",
+      "shazam_frontend": "app",
+      "shazam-frontend": "app",
+      "general": "vm",
+      "panel": "app"
+  }
 }

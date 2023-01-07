@@ -9,7 +9,7 @@ from general import default
 class SiteSocial(models.Model):
     name = models.CharField(max_length=100, unique=True)
     url = models.CharField(max_length=100)
-    icon = models.CharField(max_length=100, default=default.icon)
+    icon = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name

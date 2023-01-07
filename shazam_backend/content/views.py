@@ -1,21 +1,24 @@
 # views for the content app, with the serializers imported
 from django.shortcuts import get_object_or_404
-from rest_framework import status
+
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions, generics, filters, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from content.serializers import PostSerializer, CategorySerializer, TagSerializer
+from content.pagination import StandardResultsSetPagination
 from content.models import Post, Category, Tag
 
+class Posts(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    pagination_class = StandardResultsSetPagination
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['created_at', 'updated_at', 'title', 'category__name', 'author__username']
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class Posts(APIView):
-    def get(self, request):
-        posts = Post.objects.all()
-        posts = PostSerializer(posts, many=True)
-        return Response(posts.data, status=status.HTTP_200_OK)
-
-    @permission_classes([IsAuthenticated])
     def post(self, request):
         post = PostSerializer(data=request.data)
         if post.is_valid():
@@ -23,7 +26,6 @@ class Posts(APIView):
             return Response(post.data, status=status.HTTP_201_CREATED)
         return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @permission_classes([IsAuthenticated])
     def put(self, request):
         post = get_object_or_404(Post, pk=request.data['id'])
         post = PostSerializer(post, data=request.data, partial=True)
@@ -32,7 +34,6 @@ class Posts(APIView):
             return Response(post.data, status=status.HTTP_202_ACCEPTED)
         return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @permission_classes([IsAuthenticated])
     def delete(self, request):
         post = get_object_or_404(Post, pk=request.data['id'])
         post.delete()

@@ -1,7 +1,9 @@
 <script lang="ts">
+    import Fa from 'svelte-fa';
+    import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
     const siteInfo = {
-    "name": "Webmatrices",
+    "name": "Shazam Blog",
     "description": "A blog developed with Django and SvelteKit",
     "author": "Bishwas-py",
     "domain": "shazam.blog",
@@ -35,7 +37,11 @@
     </div>
     <!-- search box -->
     <div class="search-box">
+        <small>
+            <Fa icon="{faSearch}"/>
+        </small>
         <input type="text" placeholder="Search" />
+        <span>/</span>
     </div>
     
 </nav>
@@ -49,6 +55,8 @@
     }
     .logo {
         @apply flex items-center;
+        @apply shrink-0;
+        @apply min-w-[300px];
     }
     .logo img {
         @apply h-8;
@@ -57,17 +65,41 @@
         @apply text-2xl font-bold;
         @apply first-letter:uppercase first-letter:font-extrabold;
         
-        @apply first-letter:text-indigo-100 first-letter:bg-indigo-500;
-        @apply dark:first-letter:text-indigo-500 dark:first-letter:bg-indigo-100;
-
+        @apply text-slate-900 dark:text-slate-300;
         
-        @apply bg-gradient-to-r from-indigo-500 to-sky-600 to-blue-700;
+        @apply first-letter:bg-gradient-to-r first-letter:from-indigo-500 to-sky-600 first-letter:to-blue-700;
         @apply dark:from-indigo-700 dark:to-indigo-500;
 
-        @apply bg-clip-text text-transparent;
-
-        @apply first-letter:rounded-full first-letter:px-2;
-        @apply first-letter:shadow-lg first-letter:transform first-letter:-rotate-6;
+        @apply first-letter:bg-clip-text first-letter:text-transparent;
     }
-    
+
+    .search-box {
+        @apply flex items-center;
+        @apply bg-gray-100 dark:bg-gray-700;
+        @apply rounded-full;
+        @apply px-2 py-1;
+        @apply text-gray-500 dark:text-gray-400;
+        @apply w-full;
+        @apply h-11;
+    }
+
+    .search-box small {
+        @apply flex items-center;
+        @apply text-gray-500 dark:text-gray-400;
+        @apply mr-2;
+    }
+    .search-box input {
+        @apply bg-transparent;
+        @apply border-none;
+        @apply outline-none;
+        @apply text-sm;
+        @apply text-gray-700 dark:text-gray-300;
+        @apply w-full;
+    }
+    .search-box span {
+        @apply text-gray-500 dark:text-gray-400;
+        @apply bg-slate-50 dark:bg-slate-900;
+        @apply rounded-md;
+        @apply px-1 py-0.5;
+    }
 </style>

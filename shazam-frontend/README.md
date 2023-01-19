@@ -1,38 +1,23 @@
-# create-svelte
+## For contributor
+In the `shazam/shazam-frontend/svelte.config.js` you will have four aliases; `$item`, `$fonts`, `$utils` and `$root`
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+```
+kit: {
+  adapter: adapter(),
+  alias: {
+    $item: './src/item',
+    $fonts: './src/fonts',
+    $utils: './src/utils',
+    $root: './src'
+  }
+}
 ```
 
-## Developing
+As mentioned by the original auther, here are their purposes:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- `$items` is used to put Svelte components
+- `$fonts` is used to put custom font dependencies/files
+- `$utils` is for quick functions, utils i.e. validators.
+- `$root` can be used if you wanna access the stuff inside `src/` quickly
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+And as we all know `$lib` is not mentioned here. Feel free to use `$lib` as well, just mention the purpose of using it while the pull request.

@@ -1,4 +1,4 @@
-## For contributor
+## Aliases convention for contributors
 In the `shazam/shazam-frontend/svelte.config.js` you will have four aliases; `$item`, `$fonts`, `$utils` and `$root`
 
 ```

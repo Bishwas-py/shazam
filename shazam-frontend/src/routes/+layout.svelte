@@ -6,7 +6,9 @@
 	import '$fonts/styles/inter.css';
 	import '$fonts/styles/dancing-script.css';
 	import '$fonts/styles/poppins.css';
-	import '$root/app.postcss';
+	import '../styles/app.postcss';
+    import NavBar from "$items/NavBar.svelte";
 </script>
 
+<NavBar />
 <slot />

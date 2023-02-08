@@ -64,8 +64,6 @@ class SiteInfo(models.Model):
     url = models.CharField(max_length=100, default=default.url)
     email = models.CharField(max_length=100, default=default.email)
     socials = models.ManyToManyField(SiteSocial, blank=True)
-    site_reviews = models.ManyToManyField(SiteReview, blank=True)
-    feedbacks = models.ManyToManyField(Feedback, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

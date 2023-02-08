@@ -16,10 +16,10 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			$item: './src/item',
+			$root: './src',
 			$fonts: './src/fonts',
 			$utils: './src/utils',
-			$root: './src'
+			$items: './src/items'
 		}
 	}
 };

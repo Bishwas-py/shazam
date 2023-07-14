@@ -1,3 +1,4 @@
+
 name = "Shazam Blog"
 description = "A blog developed with Django and SvelteKit"
 author = "Bishwas-py"

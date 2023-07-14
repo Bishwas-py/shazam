@@ -1,0 +1,41 @@
+query GetAllTenPosts {
+    allPosts(first: 10) {
+        edges {
+            node {
+                id
+                slug
+                title
+                body
+                username
+                trueSlug
+                body
+                tags(first: 5, offset: 8, after: "YXJyYXljb25uZWN0aW9uOjEy") {
+                    edges {
+                        node {
+                            id
+                            name
+                            slug
+                        }
+                    }
+                    pageInfo {
+                        hasNextPage
+                        hasPreviousPage
+                        startCursor
+                        endCursor
+                    }
+                }
+                category {
+                    id
+                    name
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+        }
+    }
+}

@@ -1,0 +1,10 @@
+query GetSiteInfo {
+    siteInfo {
+        id
+        name
+        description
+        author
+        domain
+        url
+    }
+}
